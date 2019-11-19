@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { simpleAction } from './actions/simpleAction';
-import './App.css';
+import { simpleAction } from '../actions/simpleAction';
+import Routes from './Routes';
 
+
+// const routes = Routes();
 class App extends Component {
  
-  simpleAction = (event) => {
-     this.props.simpleAction();
-  }
+  // simpleAction = (event) => {
+  //    this.props.simpleAction();
+  // }
  render() {
   return (
-   <div className="App">
-    <header className="App-header">
+   <div className="App"> 
+      
+    <Routes />
+    {/* <header className="App-header">
      <h1 className="App-title">Welcome to React</h1>
     </header>
     <p className="App-intro">
@@ -22,7 +26,7 @@ class App extends Component {
         {
           JSON.stringify(this.props)
         }
-    </pre> 
+    </pre>  */}
    </div>
   );
  }

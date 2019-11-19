@@ -10,17 +10,16 @@ export default class Layout extends Component {
       <>
        <div className = "main-Wrapper">
        <Header />
-       <div className = "news-widget"> </div>
-       <Container> 
+       <div className = "news-widget"> 
         <Row> 
-          <Col lg = "4"> <Sidebar /></Col>
-          <Col lg = "8"> 
+          <Col lg = "3"> <Sidebar /></Col>
+          <Col lg = "9"> 
              <div className = "News-Sections">
                <News/> 
              </div>
           </Col>
         </Row>
-       </Container>
+        </div>
        </div>
       </>
     )

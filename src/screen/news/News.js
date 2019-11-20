@@ -3,17 +3,24 @@ import { connect } from 'react-redux'
 import Layout from  '../../components/Layout';
 import {newsAction} from '../../actions/newsAction';
 import {Container,Col, Row  } from 'react-bootstrap';
-
+import FilterDropDown from './FilterDropDown';
 
 var parm = '';
+var cat = 'general';
 class News extends Component {
  
   constructor(props) {
-  
     super(props);
      this.state = {
        newsData :[]
     }
+  }
+  filterHandleChange(value){
+
+
+     console.log(value);
+      cat  = value;
+      this.props.newsAction();
   }
   componentDidMount(){
     console.log(this.props)
@@ -21,7 +28,7 @@ class News extends Component {
      if(this.props.location.pathname == "/news/bbc-news"){
           parm = 'bbcNews'
      }else{
-          parm = 'news'
+          parm = 'us'
      }
     this.props.newsAction();
   }
@@ -34,16 +41,27 @@ class News extends Component {
         })
     }
  }
-
-  render() {
-     return (
+ render() {
+   return (
     <>
          <Layout> 
               <div className = "newsMainContainer"> 
+               <div className  = "filter-dropDown"> 
+                      <div className="inner-filter">
+                          <Row>
+                             <Col> 
+                                   <FilterDropDown
+                                     filterHandleChange = {this.filterHandleChange.bind(this)} 
+                                    
+                                    />
+                             </Col> 
+                          </Row>
+                      </div>
+               </div>
                 {this.state.newData  !==  []  ? 
                     this.state.newsData.map((data,key) =>{
                        return(
-                           <div className = "newsArticles">
+                           <div className = "newsArticles" key = {key}>
                              <Row> 
                                {data.urlToImage !== null ?
                                 <Col lg = "3">
@@ -76,7 +94,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  newsAction: () => dispatch(newsAction(parm))
+  newsAction: () => dispatch(newsAction(parm,cat))
  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

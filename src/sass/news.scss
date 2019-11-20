@@ -2,7 +2,7 @@
    padding-top:100px;
    .main-sidebar{
         height:calc(100vh - 100px);
-        padding: 0 30px;
+        padding: 50px 30px;
         box-shadow: 6px 1px 8px #80808066;
        ul{
             font-family: sans-serif;
@@ -63,3 +63,17 @@
 
              }
       }
+.filter-dropDown{
+    margin-bottom: 30px;
+    padding: 0 0 20px 0;
+     select{
+          height: 43px;
+          WIDTH: 30%;
+          BACKGROUND: white;
+          font-family: sans-serif;
+          border-radius: 4px;
+          padding: 10px;
+          color: blue;
+          font-size: 18px;
+     }
+}

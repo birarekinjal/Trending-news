@@ -4,6 +4,8 @@ import Layout from  '../../components/Layout';
 import {newsAction} from '../../actions/newsAction';
 import {Container,Col, Row  } from 'react-bootstrap';
 
+
+var parm = '';
 class News extends Component {
  
   constructor(props) {
@@ -15,9 +17,17 @@ class News extends Component {
   }
   componentDidMount(){
     console.log(this.props)
+     console.log(this.props.location.pathname , "giiiii ");
+     if(this.props.location.pathname == "/news/bbc-news"){
+          parm = 'bbcNews'
+     }else{
+          parm = 'news'
+     }
     this.props.newsAction();
   }
   componentWillReceiveProps(nextProps) {
+
+   
     if(this.props !== nextProps){
         this.setState({
            newsData : nextProps.newsReducer.newsArticle
@@ -66,7 +76,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  newsAction: () => dispatch(newsAction('news'))
+  newsAction: () => dispatch(newsAction(parm))
  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

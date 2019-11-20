@@ -12,8 +12,8 @@ const Routes = () => (
     <Router>
       
       <Switch>
-         <Route exact  path="/" component={News}/>
-         <Route exact path="/news/bbc-news" component={BBCNews}/>
+         <Route exact  path="" component={News}/>
+         <Route exact path="/news/bbc-news" component={News}/>
          <Route component={Notfound} />
        </Switch>
     </Router>

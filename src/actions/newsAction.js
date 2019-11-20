@@ -5,8 +5,6 @@ export const fetchNewsInit = () => ({
     type: 'NEWS_INIT'
 });
 export function newsAction(name,cat) {
-
-  console.log(name, "hiii" , cat);
    return function(dispatch) {
      dispatch(fetchNewsInit());
      let parm = '';
@@ -18,7 +16,6 @@ export function newsAction(name,cat) {
      }
      return axios.get(parm)
      .then(({ data }) => {
-       console.log(data ,"data");
        dispatch(fetchNewsSuccess(data.articles));
      });
   };

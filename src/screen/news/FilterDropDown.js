@@ -7,8 +7,7 @@ class FilterDropDown extends Component {
        this.props.filterHandleChange(e.target.value);
    }
   render() {
-      console.log(this.props)
-     return (
+    return (
       <>
           <div>
              <select onChange = {this.handleChange.bind(this)}>

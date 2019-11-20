@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Layout from  '../../components/Layout';
 import {newsAction} from '../../actions/newsAction';
-import {Container,Col, Row  } from 'react-bootstrap';
+import {Col, Row  } from 'react-bootstrap';
 import FilterDropDown from './FilterDropDown';
 
 var parm = '';
@@ -16,15 +16,10 @@ class News extends Component {
     }
   }
   filterHandleChange(value){
-
-
-     console.log(value);
       cat  = value;
       this.props.newsAction();
   }
   componentDidMount(){
-    console.log(this.props)
-     console.log(this.props.location.pathname , "giiiii ");
      if(this.props.location.pathname == "/news/bbc-news"){
           parm = 'bbcNews'
      }else{

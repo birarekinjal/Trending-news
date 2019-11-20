@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import Layout from  '../../components/Layout';
+import { connect } from 'react-redux'
 import {newsAction} from '../../actions/newsAction';
 
-class News extends Component {
- 
-  constructor(props) {
+
+class BBCNews extends Component {
+    constructor(props) {
   
     super(props);
      this.state = {
        newsData :[]
     }
   }
+
   componentDidMount(){
-    console.log(this.props)
-    this.props.newsAction();
-  }
+        this.props.newsAction();
+   }
   componentWillReceiveProps(nextProps) {
     if(this.props !== nextProps){
         this.setState({
@@ -25,12 +25,14 @@ class News extends Component {
  }
 
   render() {
-     return (
-    <>
-         <Layout> 
+    return (
+      <> 
+        <div> 
+        <Layout> 
               <div className = "newsMainContainer"> 
                 {this.state.newData  !==  []  ? 
                     this.state.newsData.map((data,key) =>{
+                       console.log(data);
                        return(
                            <div className = "newsArticles">
                              <div className = "title">{data.title} </div>
@@ -41,19 +43,18 @@ class News extends Component {
                   }) :'hii'}
               </div>
         </Layout>
-    </>
+        </div>  
+      </>
     )
   }
 }
 
-
-
 const mapStateToProps = state => ({
- ...state
-})
-
+    ...state
+   })
+   
 const mapDispatchToProps = dispatch => ({
-  newsAction: () => dispatch(newsAction('news'))
- })
-
-export default connect(mapStateToProps, mapDispatchToProps)(News);
+     newsAction: () => dispatch(newsAction('bbcNews'))
+    })
+   
+export default connect(mapStateToProps, mapDispatchToProps)(BBCNews);

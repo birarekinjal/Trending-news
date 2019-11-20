@@ -21,3 +21,39 @@
    }
 
 }
+.News-Sections{
+     padding:50px 20px;
+}
+ .newsMainContainer{
+             
+             .newsArticles{
+               margin-bottom: 10px;
+               width:100%;
+               background:#ffffff;
+               border-bottom:1px solid grey;
+               padding:10px 0;
+             }
+              
+             .title{
+                   font-size:18px;
+                   line-height: 20px;
+                   font-family: sans-serif;
+                   padding-bottom: 5px;
+             }
+             .description{
+                    font-size:14px;
+                    line-height: 20px;
+                    font-family: sans-serif;
+                    padding-bottom: 5px;
+             }
+             .url{
+                  a{
+                         display: inline-block;
+                         font-size:12px;
+                         line-height: 20px;
+                         font-family: sans-serif;
+                         padding-bottom: 5px;
+                   }
+
+             }
+      }

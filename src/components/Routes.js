@@ -5,13 +5,15 @@ import {
 import Layout from './Layout';
 import  AboutUs  from './AboutUs';
 import  Notfound  from './Notfound';
+import News from '../screen/news/News';
+import BBCNews from '../screen/news/BBCNews'
 
 const Routes = () => (
     <Router>
       
       <Switch>
-         <Route exact  path="/" component={Layout}/>
-         <Route exact path="/about" component={AboutUs}/>
+         <Route exact  path="/" component={News}/>
+         <Route exact path="/news/bbc-news" component={BBCNews}/>
          <Route component={Notfound} />
        </Switch>
     </Router>

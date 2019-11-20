@@ -15,7 +15,7 @@ export default class Layout extends Component {
           <Col lg = "3"> <Sidebar /></Col>
           <Col lg = "9"> 
              <div className = "News-Sections">
-               <News/> 
+               {this.props.children}
              </div>
           </Col>
         </Row>

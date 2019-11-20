@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Layout from  '../../components/Layout';
 import {newsAction} from '../../actions/newsAction';
+import {Container,Col, Row  } from 'react-bootstrap';
 
 class News extends Component {
  
@@ -33,9 +34,21 @@ class News extends Component {
                     this.state.newsData.map((data,key) =>{
                        return(
                            <div className = "newsArticles">
-                             <div className = "title">{data.title} </div>
-                             <div className = "description">  {data.description} </div>
-                             <div className = "url"> <a href = {data.url} target="_blank"> {data.url} </a> </div>
+                             <Row> 
+                               {data.urlToImage !== null ?
+                                <Col lg = "3">
+                                     <div className = "image-container">
+                                         <img src = {data.urlToImage} alt = "no-data" />
+                                     </div>
+                                </Col> :''}
+                                 <Col lg = "7">
+                                  <div className = "title">{data.title} </div>
+                                  <div className = "description">  {data.description} </div>
+                                  <div className = "url"> <a href = {data.url} target="blank"> {data.url} </a> </div>
+                                 </Col>
+                             </Row>
+                             
+                           
                            </div>
                        )
                   }) :'hii'}

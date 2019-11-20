@@ -13,7 +13,7 @@ export function newsAction(name) {
           parm = `${API}?sources=bbc-news&apiKey=${APIKey}`;
      }else{
           
-           parm = `${API}?contry=us&apiKey=${APIKey}`
+           parm = `${API}?country=us&apiKey=${APIKey}`
      }
      return axios.get(parm)
      .then(({ data }) => {

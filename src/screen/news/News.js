@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import Layout from  '../../components/Layout';
-import {newsAction} from '../../actions/newsAction';
+import * as newsAction from '../../actions/newsAction'
+//import {newsAction} from '../../actions/newsAction';
 import {Col, Row  } from 'react-bootstrap';
 import FilterDropDown from './FilterDropDown';
-import { type } from 'os';
 
 var parm = '';
-var cat = 'general';
 class News extends Component {
  
   constructor(props) {
@@ -17,16 +17,15 @@ class News extends Component {
     }
   }
   filterHandleChange(value){
-      cat  = value;
-      this.props.newsAction();
+      this.props.newsAction.newsAction(parm,value);
   }
   componentDidMount(){
      if(this.props.location.pathname == "/news/bbc-news"){
           parm = 'bbcNews'
      }else{
-          parm = 'uk'
+          parm = 'us'
      }
-    this.props.newsAction();
+    this.props.newsAction.newsAction(parm,null);
   }
   componentWillReceiveProps(nextProps) {
 
@@ -75,6 +74,7 @@ class News extends Component {
   )
 }
  render() {
+   console.log(this.props , "_+++")
    return (
     <>
          <Layout> 
@@ -142,7 +142,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  newsAction: () => dispatch(newsAction(parm,cat))
+
+  newsAction: bindActionCreators(newsAction, dispatch),
+  // newsAction: () => dispatch(newsAction(parm,cat))
  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

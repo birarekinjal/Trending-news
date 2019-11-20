@@ -22,3 +22,19 @@
             }
     } 
 }
+
+// Loader
+.loaderImage{
+    background-image: url('https://app.visibly.io/img/visiblyLoader.gif');
+    height:10px;
+    width:100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-size:cover;
+ }
+ .description.loaderImage{
+   width:300px;
+ }
+ .url.loaderImage{
+     width:100px;
+ }

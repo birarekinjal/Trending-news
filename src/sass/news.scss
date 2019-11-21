@@ -106,13 +106,15 @@
          li {
           display: inline-block;
           padding: 7px 8px;
-          background: #0000ff;
+          background: #77778aa3;
           color: #ffffff;
           margin-right: 7px;
           border-radius: 5px;
           font-size: 14px;
-          a{
-                color:#ffffff;
-          }
-     }
+          cursor: pointer;
+         }
+         li:hover, li.active{
+              background:#0000ffa3;
+         }
+        
 }

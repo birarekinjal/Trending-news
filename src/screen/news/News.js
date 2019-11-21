@@ -7,27 +7,23 @@ import {Col, Row  } from 'react-bootstrap';
 import FilterDropDown from './FilterDropDown';
 
 var parm = '';
-var currentTodos = [];
+var currentNews = [];
 class News extends Component {
   constructor(props) {
     super(props);
      this.state = {
        newsData : [],
        currentPage: 1,
-       todosPerPage: 4
+       newsPerPage: 4,
+       currentNews:[],
+       pageNumbers:[]
     }
-    this.handleClick = this.handleClick.bind(this);
   }
-
   handleClick(event) {
      this.setState({
-        currentPage: Number(event.target.id)
-     });
+          currentPage: Number(event.target.id)
+      });
    }
-  handlePageChange(pageNumber) {
-    this.setState({activePage: pageNumber});
-  }
- 
   filterHandleChange(value){
     this.props.newsAction.newsAction(parm,value,null);
   }
@@ -87,30 +83,52 @@ class News extends Component {
   )
 }
  render() {
-    const {currentPage, todosPerPage } = this.state;
-    const indexOfLastTodo = currentPage * todosPerPage;
-    const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-    currentTodos =  this.state.newsData.slice(indexOfFirstTodo, indexOfLastTodo);
+    const {currentPage, newsPerPage } = this.state;
+    const indexOfLastNews = currentPage * newsPerPage;
+    const indexOfFirstNews = indexOfLastNews - newsPerPage;
     const pageNumbers = [];
-       for (let i = 1; i <= Math.ceil(this.state.newsData.length / todosPerPage); i++) {
+    currentNews =  this.state.newsData.slice(indexOfFirstNews, indexOfLastNews);
+       for (let i = 1; i <= Math.ceil(this.state.newsData.length / newsPerPage); i++) {
           pageNumbers.push(i);
      }
+
+     const renderNews = currentNews.map((data,key) =>{
+              return(
+                     <div className = "news-articles" key = {key}>
+                         <Row> 
+                              {data.urlToImage !== null ?
+                                <Col lg = "3">
+                                      <div className = "image-container">
+                                             <img src = {data.urlToImage} alt = "no-data" />
+                                       </div>
+                                </Col> 
+                                :''}
+                                <Col  lg = {`${data.urlToImage != null ? '7 ' :'9'}`}>
+                                        <div className = "title">{data.title} </div>
+                                        <div className = "description">  {data.description} </div>
+                                        <div className = "url"> <a href = {data.url} target="blank"> {data.url} </a> </div>
+                                </Col>
+                            </Row>
+                       </div>
+                                    
+                  )
+     })
     const renderPageNumbers = pageNumbers.map(number => {
           return (
-            <li
-              key={number}
-              id={number}
-              onClick={this.handleClick}
-            >
-             <a href = "#"> {number} </a>
-            </li>
-          );
+                <li
+                  key={number}
+                  id={number}
+                  onClick={this.handleClick.bind(this)}
+                  className = {this.state.currentPage  == number ? 'active' : ''}
+                >
+                  {number} 
+                </li>
+            );
         });
    return (
     <>
          <Layout> 
-          
-              <div className = "news-main-container"> 
+            <div className = "news-main-container"> 
                <div className  = "filter-dropDown"> 
                       <div className="inner-filter">
                           <Row>
@@ -118,49 +136,26 @@ class News extends Component {
                                    <FilterDropDown
                                      filterHandleChange = {this.filterHandleChange.bind(this)} 
                                      languageHandleChange = {this.languageHandleChange.bind(this)}
-                                    
                                     />
                              </Col> 
                           </Row>
                       </div>
                </div>
                <div class = "news-articlesWrapper"> 
-                  {/* new data */}
                   {this.props.newsReducer.loading  == true ?
                      this.preLoader()
-                   :
+                    :
                      <div className = "data"> 
-                        {currentTodos.length > 0 ?
+                        {currentNews.length > 0 ?
                             <div> 
-                            { 
-                              currentTodos.map((data,key) =>{
-                                return(
-                                    <div className = "news-articles" key = {key}>
-                                      <Row> 
-                                        {data.urlToImage !== null ?
-                                          <Col lg = "3">
-                                              <div className = "image-container">
-                                                  <img src = {data.urlToImage} alt = "no-data" />
-                                              </div>
-                                          </Col> :''}
-                                          <Col  lg = {`${data.urlToImage != null ? '7 ' :'9'}`}>
-                                            <div className = "title">{data.title} </div>
-                                            <div className = "description">  {data.description} </div>
-                                            <div className = "url"> <a href = {data.url} target="blank"> {data.url} </a> </div>
-                                          </Col>
-                                      </Row>
-                                      </div>
-                                    
-                                )
-                            })  
-                            }
+                               {renderNews}
                             </div>
                           :  <h1 className = "no-post-found"> No News found</h1>} 
                      </div>
                    }  
                 </div>
               </div>
-              {currentTodos.length > 0 ? 
+              {currentNews.length > 0 ? 
                 <ul id="page-numbers">
                     {renderPageNumbers}
                 </ul>

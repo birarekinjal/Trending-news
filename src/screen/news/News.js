@@ -12,9 +12,24 @@ class News extends Component {
   constructor(props) {
     super(props);
      this.state = {
-       newsData : []
+       newsData : [],
+       currentPage: 1,
+       todosPerPage: 4
     }
+    
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  handleClick(event) {
+     this.setState({
+        currentPage: Number(event.target.id)
+     });
+   }
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({activePage: pageNumber});
+  }
+ 
   filterHandleChange(value){
     this.props.newsAction.newsAction(parm,value,null);
   }
@@ -30,14 +45,12 @@ class News extends Component {
     this.props.newsAction.newsAction(parm,null,null);
   }
   componentWillReceiveProps(nextProps) {
-
-   
     if(this.props !== nextProps){
         this.setState({
            newsData : nextProps.newsReducer.newsArticle
         })
     }
- }
+   }
  preLoader(){
   return(
       <div> 
@@ -76,9 +89,29 @@ class News extends Component {
   )
 }
  render() {
+    const {currentPage, todosPerPage } = this.state;
+    const indexOfLastTodo = currentPage * todosPerPage;
+    const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+    const currentTodos = this.state.newsData.slice(indexOfFirstTodo, indexOfLastTodo);
+    const pageNumbers = [];
+       for (let i = 1; i <= Math.ceil(this.state.newsData.length / todosPerPage); i++) {
+          pageNumbers.push(i);
+     }
+    const renderPageNumbers = pageNumbers.map(number => {
+          return (
+            <li
+              key={number}
+              id={number}
+              onClick={this.handleClick}
+            >
+             <a href = "#"> {number} </a>
+            </li>
+          );
+        });
    return (
     <>
          <Layout> 
+          
               <div className = "news-main-container"> 
                <div className  = "filter-dropDown"> 
                       <div className="inner-filter">
@@ -99,10 +132,10 @@ class News extends Component {
                      this.preLoader()
                    :
                      <div className = "data"> 
-                        {this.state.newsData.length > 0 ?
+                        {currentTodos.length > 0 ?
                             <div> 
                             { 
-                              this.state.newsData.map((data,key) =>{
+                              currentTodos.map((data,key) =>{
                                 return(
                                     <div className = "news-articles" key = {key}>
                                       <Row> 
@@ -127,10 +160,13 @@ class News extends Component {
                           :  <h1 className = "no-post-found"> No News found</h1>} 
                      </div>
                    }  
-                 
-                  
                 </div>
               </div>
+              {currentTodos.length > 0 ? 
+                <ul id="page-numbers">
+                    {renderPageNumbers}
+                </ul>
+            :''}
         </Layout>
     </>
     )

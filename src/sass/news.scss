@@ -15,7 +15,7 @@
                     a {
                          display: inline-block;
                          padding: 10px;
-                         color: grey;
+                         color:#808080;
                          font-size: 20px;
                          line-height: 26px;
 
@@ -36,7 +36,7 @@
           margin-bottom: 10px;
           width: 100%;
           background: #ffffff;
-          border-bottom: 1px solid grey;
+          border-bottom: 1px solid #808080;
           padding: 10px 0;
      }
 
@@ -49,19 +49,19 @@
      }
 
      .title {
-          font-size:20px;
+          font-size: 20px;
           line-height: 20px;
           font-family: sans-serif;
-          padding-bottom:20px;
-          font-weight:500;
+          padding-bottom: 20px;
+          font-weight: 500;
      }
 
      .description {
           font-size: 14px;
           line-height: 20px;
           font-family: sans-serif;
-          padding-bottom:10px;
-          font-weight:500;
+          padding-bottom: 10px;
+          font-weight: 500;
      }
 
      .url {
@@ -83,18 +83,36 @@
 .filter-dropDown {
      margin-bottom: 30px;
      padding: 0 0 20px 0;
-   select {
+
+     select {
           height: 43px;
-          width:100%;
-          background:#ffffff;
+          width: 100%;
+          background: #ffffff;
           font-family: sans-serif;
           border-radius: 4px;
           padding: 10px;
-          color: blue;
+          color: #0000ff;
           font-size: 18px;
      }
 }
-.no-post-found{
-   text-align: center;
-   padding:30px ;
+
+.no-post-found {
+     text-align: center;
+     padding: 30px;
+}
+
+#page-numbers {
+         text-align: right ;
+         li {
+          display: inline-block;
+          padding: 7px 8px;
+          background: #0000ff;
+          color: #ffffff;
+          margin-right: 7px;
+          border-radius: 5px;
+          font-size: 14px;
+          a{
+                color:#ffffff;
+          }
+     }
 }

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import Layout from  '../../components/Layout';
 import * as newsAction from '../../actions/newsAction'
-//import {newsAction} from '../../actions/newsAction';
 import {Col, Row  } from 'react-bootstrap';
 import FilterDropDown from './FilterDropDown';
 
@@ -17,7 +16,10 @@ class News extends Component {
     }
   }
   filterHandleChange(value){
-      this.props.newsAction.newsAction(parm,value);
+    this.props.newsAction.newsAction(parm,value,null);
+  }
+  languageHandleChange(value){
+    this.props.newsAction.newsAction(parm,null ,value);
   }
   componentDidMount(){
      if(this.props.location.pathname == "/news/bbc-news"){
@@ -25,7 +27,7 @@ class News extends Component {
      }else{
           parm = 'us'
      }
-    this.props.newsAction.newsAction(parm,null);
+    this.props.newsAction.newsAction(parm,null,null);
   }
   componentWillReceiveProps(nextProps) {
 
@@ -41,30 +43,30 @@ class News extends Component {
       <div> 
         <div class="data">
            <div>
-             <div class="newsArticles">
+             <div class="news-articles">
                  <div class="row">
                    <div class="col-lg-7">
-                      <div class="title loaderImage"></div>
-                       <div className = "description loaderImage"> </div>
-                       <div className = "url loaderImage"> </div>
+                      <div class="title loader-image"></div>
+                       <div className = "description loader-image"> </div>
+                       <div className = "url loader-image"> </div>
                     </div>
                   </div>
                 </div>
-                 <div class="newsArticles">
+                 <div class="news-articles">
                  <div class="row">
                    <div class="col-lg-7">
-                      <div class="title loaderImage"></div>
-                       <div className = "description loaderImage"> </div>
-                       <div className = "url loaderImage"> </div>
+                      <div class="title loader-image"></div>
+                       <div className = "description loader-image"> </div>
+                       <div className = "url loader-image"> </div>
                     </div>
                   </div>
                 </div>
-                 <div class="newsArticles">
+                 <div class="news-articles">
                  <div class="row">
                    <div class="col-lg-7">
-                      <div class="title loaderImage"></div>
-                       <div className = "description loaderImage"> </div>
-                       <div className = "url loaderImage"> </div>
+                      <div class="title loader-image"></div>
+                       <div className = "description loader-image"> </div>
+                       <div className = "url loader-image"> </div>
                     </div>
                   </div>
                 </div>
@@ -74,24 +76,24 @@ class News extends Component {
   )
 }
  render() {
-   console.log(this.props , "_+++")
    return (
     <>
          <Layout> 
-              <div className = "newsMainContainer"> 
+              <div className = "news-main-container"> 
                <div className  = "filter-dropDown"> 
                       <div className="inner-filter">
                           <Row>
                              <Col> 
                                    <FilterDropDown
                                      filterHandleChange = {this.filterHandleChange.bind(this)} 
+                                     languageHandleChange = {this.languageHandleChange.bind(this)}
                                     
                                     />
                              </Col> 
                           </Row>
                       </div>
                </div>
-               <div class = "newsArticlesWrapper"> 
+               <div class = "news-articlesWrapper"> 
                   {/* new data */}
                   {this.props.newsReducer.loading  == true ?
                      this.preLoader()
@@ -102,7 +104,7 @@ class News extends Component {
                             { 
                               this.state.newsData.map((data,key) =>{
                                 return(
-                                    <div className = "newsArticles" key = {key}>
+                                    <div className = "news-articles" key = {key}>
                                       <Row> 
                                         {data.urlToImage !== null ?
                                           <Col lg = "3">
@@ -110,7 +112,7 @@ class News extends Component {
                                                   <img src = {data.urlToImage} alt = "no-data" />
                                               </div>
                                           </Col> :''}
-                                          <Col lg = "7">
+                                          <Col  lg = {`${data.urlToImage != null ? '7 ' :'9'}`}>
                                             <div className = "title">{data.title} </div>
                                             <div className = "description">  {data.description} </div>
                                             <div className = "url"> <a href = {data.url} target="blank"> {data.url} </a> </div>
@@ -122,7 +124,7 @@ class News extends Component {
                             })  
                             }
                             </div>
-                          :  ' no post'} 
+                          :  <h1 className = "no-post-found"> No News found</h1>} 
                      </div>
                    }  
                  

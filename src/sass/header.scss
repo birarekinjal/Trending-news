@@ -24,7 +24,7 @@
 }
 
 // Loader
-.loaderImage{
+.loader-image{
     background-image: url('https://app.visibly.io/img/visiblyLoader.gif');
     height:10px;
     width:100%;
@@ -32,9 +32,9 @@
     margin-bottom: 10px;
     background-size:cover;
  }
- .description.loaderImage{
+ .description.loader-image{
    width:300px;
  }
- .url.loaderImage{
+ .url.loader-image{
      width:100px;
  }

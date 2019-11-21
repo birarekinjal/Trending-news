@@ -6,7 +6,7 @@ export default class Sidebar extends Component {
       <>
          <div className = "main-sidebar"> 
               <ul> 
-                <li> <a href ="/"> Home</a></li>
+                <li> <a href ="/"> Country</a></li>
                 <li> <a href ="/news/bbc-news">BBC News</a></li>
                </ul>
          </div>

@@ -3,7 +3,6 @@ import Layout from  '../../components/Layout';
 import { connect } from 'react-redux'
 import {newsAction} from '../../actions/newsAction';
 
-
 class BBCNews extends Component {
     constructor(props) {
   
@@ -29,12 +28,11 @@ class BBCNews extends Component {
       <> 
         <div> 
         <Layout> 
-              <div className = "newsMainContainer"> 
+              <div className = "news-main-container"> 
                 {this.state.newData  !==  []  ? 
                     this.state.newsData.map((data,key) =>{
-                       console.log(data);
                        return(
-                           <div className = "newsArticles">
+                           <div className = "news-articles">
                              <div className = "title">{data.title} </div>
                              <div className = "description">  {data.description} </div>
                              <div className = "url"> <a href = {data.url} target="_blank"> {data.url} </a> </div>

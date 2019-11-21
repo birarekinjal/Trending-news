@@ -30,9 +30,9 @@
      padding: 50px 20px;
 }
 
-.newsMainContainer {
+.news-main-container {
 
-     .newsArticles {
+     .news-articles {
           margin-bottom: 10px;
           width: 100%;
           background: #ffffff;
@@ -49,17 +49,19 @@
      }
 
      .title {
-          font-size: 18px;
+          font-size:20px;
           line-height: 20px;
           font-family: sans-serif;
-          padding-bottom: 5px;
+          padding-bottom:20px;
+          font-weight:500;
      }
 
      .description {
           font-size: 14px;
           line-height: 20px;
           font-family: sans-serif;
-          padding-bottom: 5px;
+          padding-bottom:10px;
+          font-weight:500;
      }
 
      .url {
@@ -69,6 +71,10 @@
                line-height: 20px;
                font-family: sans-serif;
                padding-bottom: 5px;
+               width: 100%;
+               overflow: hidden;
+               text-overflow: ellipsis;
+               white-space: pre;
           }
 
      }
@@ -77,10 +83,9 @@
 .filter-dropDown {
      margin-bottom: 30px;
      padding: 0 0 20px 0;
-
-     select {
+   select {
           height: 43px;
-          width:30%;
+          width:100%;
           background:#ffffff;
           font-family: sans-serif;
           border-radius: 4px;
@@ -88,4 +93,8 @@
           color: blue;
           font-size: 18px;
      }
+}
+.no-post-found{
+   text-align: center;
+   padding:30px ;
 }

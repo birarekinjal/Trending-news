@@ -3,7 +3,6 @@ import Layout from  './Layout'
 
 export default class About extends Component {
   render() {
-    console.log(this.props)
     return (
       <> 
          <Layout >

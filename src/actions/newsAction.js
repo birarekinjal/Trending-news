@@ -4,15 +4,15 @@ const APIKey = '226439694ab54c6d9620a50d36c22b49';
 export const fetchNewsInit = () => ({
     type: 'NEWS_INIT'
 });
-export function newsAction(name,cat) {
+export function newsAction(name,cat,language) {
    return function(dispatch) {
      dispatch(fetchNewsInit());
      let parm = '';
      if(name === "bbcNews"){
        
-          parm = `${API}?source=bbc-news&category=${cat}&apiKey=${APIKey}`;
+          parm = `${API}?source=bbc-news&category=${cat}&language=${language}&apiKey=${APIKey}`;
      }else{
-           parm = `${API}?country=${name}&apiKey=${APIKey}`
+           parm = `${API}?country=${name}&language=${language}&apiKey=${APIKey}`
      }
      return axios.get(parm)
      .then(({ data }) => {

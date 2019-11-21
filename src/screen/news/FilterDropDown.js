@@ -1,23 +1,60 @@
 import React, { Component } from 'react';
 import {newsAction} from '../../actions/newsAction';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import {Col, Row  } from 'react-bootstrap';
 
 class FilterDropDown extends Component {
-    handleChange(e){ 
-       this.props.filterHandleChange(e.target.value);
+
+  constructor(props) {
+    super(props);
+     this.state = {
+      countries : [],
+      lan:[]
+    }
+  }
+   handleChange(e){ 
+      this.props.filterHandleChange(e.target.value);
    }
+   languageHandleChange(e){
+       this.props.languageHandleChange(e.target.value); 
+   }
+   componentDidMount(){
+     this.setState({
+        countries: [ 'general' , 'health' , 'science' , 'sports' ,'technology'],
+        lan: ['fr','he','it','nl','no','pt','ru','se']
+  });
+ }
   render() {
     return (
       <>
-          <div>
+          <Row>
+          <Col lg= "3">
+           <div>
              <select onChange = {this.handleChange.bind(this)}>
-                    <option value = 'general'> general </option>
-                    <option value = 'health'> health </option>
-                    <option value = 'science'> science </option>
-                    <option value = 'sports'> sports </option>
-                    <option value = 'technology'> technology </option>
+                {
+                    this.state.countries.map((category,key) => {
+                        return(
+                            <option  key = {key} value = {category}> {category} </option>
+                        )
+                    })
+                }
                </select>
            </div>
+          </Col>
+          <Col lg= "3">
+            <div>
+             <select onChange = {this.languageHandleChange.bind(this)}>
+                {
+                    this.state.lan.map((lan,key) => {
+                        return(
+                            <option  key = {key} value = {lan}> {lan} </option>
+                        )
+                    })
+                }
+               </select>
+           </div>
+          </Col>
+           </Row>
       </>
     )
   }

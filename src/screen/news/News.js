@@ -7,8 +7,8 @@ import {Col, Row  } from 'react-bootstrap';
 import FilterDropDown from './FilterDropDown';
 
 var parm = '';
+var currentTodos = [];
 class News extends Component {
- 
   constructor(props) {
     super(props);
      this.state = {
@@ -16,7 +16,6 @@ class News extends Component {
        currentPage: 1,
        todosPerPage: 4
     }
-    
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -26,7 +25,6 @@ class News extends Component {
      });
    }
   handlePageChange(pageNumber) {
-    console.log(`active page is ${pageNumber}`);
     this.setState({activePage: pageNumber});
   }
  
@@ -45,39 +43,39 @@ class News extends Component {
     this.props.newsAction.newsAction(parm,null,null);
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props !== nextProps){
+   if(this.props !== nextProps){
         this.setState({
            newsData : nextProps.newsReducer.newsArticle
         })
     }
-   }
+  }
  preLoader(){
   return(
       <div> 
-        <div class="data">
+        <div className="data">
            <div>
-             <div class="news-articles">
-                 <div class="row">
-                   <div class="col-lg-7">
+             <div className="news-articles">
+                 <div className="row">
+                   <div className="col-lg-7">
                       <div class="title loader-image"></div>
                        <div className = "description loader-image"> </div>
                        <div className = "url loader-image"> </div>
                     </div>
                   </div>
                 </div>
-                 <div class="news-articles">
-                 <div class="row">
-                   <div class="col-lg-7">
-                      <div class="title loader-image"></div>
+                 <div className="news-articles">
+                 <div className="row">
+                   <div className="col-lg-7">
+                      <div className="title loader-image"></div>
                        <div className = "description loader-image"> </div>
                        <div className = "url loader-image"> </div>
                     </div>
                   </div>
                 </div>
-                 <div class="news-articles">
-                 <div class="row">
-                   <div class="col-lg-7">
-                      <div class="title loader-image"></div>
+                 <div className="news-articles">
+                 <div className="row">
+                   <div className="col-lg-7">
+                      <div className="title loader-image"></div>
                        <div className = "description loader-image"> </div>
                        <div className = "url loader-image"> </div>
                     </div>
@@ -92,7 +90,7 @@ class News extends Component {
     const {currentPage, todosPerPage } = this.state;
     const indexOfLastTodo = currentPage * todosPerPage;
     const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-    const currentTodos = this.state.newsData.slice(indexOfFirstTodo, indexOfLastTodo);
+    currentTodos =  this.state.newsData.slice(indexOfFirstTodo, indexOfLastTodo);
     const pageNumbers = [];
        for (let i = 1; i <= Math.ceil(this.state.newsData.length / todosPerPage); i++) {
           pageNumbers.push(i);
@@ -180,9 +178,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-
-  newsAction: bindActionCreators(newsAction, dispatch),
-  // newsAction: () => dispatch(newsAction(parm,cat))
+   newsAction: bindActionCreators(newsAction, dispatch),
  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

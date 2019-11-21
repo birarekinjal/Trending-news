@@ -9,7 +9,7 @@ export function newsAction(name,cat,language) {
      dispatch(fetchNewsInit());
      let parm = '';
      if(name === "bbcNews"){
-            parm = `${API}top-headlines?category=${cat}&apiKey=${APIKey}`; 
+            parm = `${API}top-headlines?category=${cat}&language=${language}&apiKey=${APIKey}`; 
      }else{
            parm = `${API}top-headlines?country=${name}&language=${language}&apiKey=${APIKey}`
      }

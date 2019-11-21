@@ -8,6 +8,7 @@ export default class Sidebar extends Component {
               <ul> 
                 <li> <a href ="/"> Country</a></li>
                 <li> <a href ="/news/bbc-news">BBC News</a></li>
+                <li> <a href = "#">  BookMark </a></li>
                </ul>
          </div>
       </>

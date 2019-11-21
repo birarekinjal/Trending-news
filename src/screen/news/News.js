@@ -91,8 +91,7 @@ class News extends Component {
        for (let i = 1; i <= Math.ceil(this.state.newsData.length / newsPerPage); i++) {
           pageNumbers.push(i);
      }
-
-     const renderNews = currentNews.map((data,key) =>{
+    const renderNews = currentNews.map((data,key) =>{
               return(
                      <div className = "news-articles" key = {key}>
                          <Row> 
@@ -103,11 +102,15 @@ class News extends Component {
                                        </div>
                                 </Col> 
                                 :''}
-                                <Col  lg = {`${data.urlToImage != null ? '7 ' :'9'}`}>
+                                <Col  lg = {`${data.urlToImage != null ? '7 ' :'10'}`}>
                                         <div className = "title">{data.title} </div>
                                         <div className = "description">  {data.description} </div>
                                         <div className = "url"> <a href = {data.url} target="blank"> {data.url} </a> </div>
                                 </Col>
+                            </Row>
+                            <Row> 
+                               <Col lg = "10">
+                                <div className = "view-more-wrapper"> <a href = {data.url} target = "_blank"> ReadMore>></a></div></Col>
                             </Row>
                        </div>
                                     

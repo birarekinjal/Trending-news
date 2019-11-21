@@ -65,9 +65,11 @@
      }
 
      .url {
+          padding-bottom: 15px;
+          padding-right: 5px;
           a {
                display: inline-block;
-               font-size: 12px;
+               font-size: 14px;
                line-height: 20px;
                font-family: sans-serif;
                padding-bottom: 5px;
@@ -117,4 +119,17 @@
               background:#0000ffa3;
          }
         
+}
+.view-more-wrapper{
+     text-align:right;
+     padding-right:4px;
+     a{
+           font-size:14px;
+           display: inline-block;
+           font-weight:500;
+     }
+     a:hover{
+           color:#0838bd;
+           text-decoration:none;
+     }
 }

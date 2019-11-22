@@ -11,7 +11,7 @@ export default class Layout extends Component {
        <Header />
        <div className = "news-widget"> 
         <Row> 
-          <Col lg = "3"> <Sidebar /></Col>
+          <Col lg = "3"> <Sidebar history={this.props.history} /></Col>
           <Col lg = "9"> 
              <div className = "News-Sections">
                {this.props.children}

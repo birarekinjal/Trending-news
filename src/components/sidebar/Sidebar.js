@@ -8,7 +8,7 @@ export default class Sidebar extends Component {
               <ul> 
                 <li> <a href ="/"> Country</a></li>
                 <li> <a href ="/news/bbc-news">BBC News</a></li>
-                <li> <a href = "#">  BookMark </a></li>
+                <li><span onClick={()=>this.props.history.push("/news/bookmark")}>BookMarks</span></li>
                </ul>
          </div>
       </>

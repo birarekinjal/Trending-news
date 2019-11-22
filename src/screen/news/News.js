@@ -5,9 +5,12 @@ import Layout from  '../../components/Layout';
 import * as newsAction from '../../actions/newsAction'
 import {Col, Row  } from 'react-bootstrap';
 import FilterDropDown from './FilterDropDown';
+import BookMarks from  '../BookMarks';
+import BookMarkHome from  '../BookMarkHome';
 
 var parm = '';
 var currentNews = [];
+const  bookMarksNews = [];
 class News extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +19,8 @@ class News extends Component {
        currentPage: 1,
        newsPerPage: 4,
        currentNews:[],
-       pageNumbers:[]
+       pageNumbers:[],
+       bookMarkNews :[]
     }
   }
   handleClick(event) {
@@ -31,19 +35,22 @@ class News extends Component {
     this.props.newsAction.newsAction(parm,null ,value);
   }
   componentDidMount(){
-     if(this.props.location.pathname == "/news/bbc-news"){
+
+   console.log(this.props , "hiiii props")
+   if(this.props.location.pathname == "/news/bbc-news"){
           parm = 'bbcNews'
      }else{
           parm = 'us'
      }
-    this.props.newsAction.newsAction(parm,null,null);
+     this.props.newsAction.newsAction(parm,null,null);
   }
   componentWillReceiveProps(nextProps) {
-   if(this.props !== nextProps){
+    if(this.props !== nextProps){
         this.setState({
            newsData : nextProps.newsReducer.newsArticle
         })
     }
+   
   }
  preLoader(){
   return(
@@ -82,6 +89,14 @@ class News extends Component {
       </div>
   )
 }
+bookMarkOnChange(value , list){
+  if(value == true){
+      bookMarksNews.push(list);
+  }else{
+      bookMarksNews.pop(list);
+  }
+  this.props.newsAction.bookMarkNews(bookMarksNews);
+}
  render() {
     const {currentPage, newsPerPage } = this.state;
     const indexOfLastNews = currentPage * newsPerPage;
@@ -107,6 +122,9 @@ class News extends Component {
                                         <div className = "description">  {data.description} </div>
                                         <div className = "url"> <a href = {data.url} target="blank"> {data.url} </a> </div>
                                 </Col>
+                                <Col lg = "1"> 
+                                 <BookMarks list = {data}  bookMarkOnChange = {this.bookMarkOnChange.bind(this)} />
+                                </Col>
                             </Row>
                             <Row> 
                                <Col lg = "10">
@@ -130,7 +148,10 @@ class News extends Component {
         });
    return (
     <>
-         <Layout> 
+         <Layout history={this.props.history}> 
+         {window.location.pathname  == '/news/bookmark' ?
+             <BookMarkHome /> : 
+           
             <div className = "news-main-container"> 
                <div className  = "filter-dropDown"> 
                       <div className="inner-filter">
@@ -158,11 +179,13 @@ class News extends Component {
                    }  
                 </div>
               </div>
-              {currentNews.length > 0 ? 
+         }
+         {window.location.pathname  !== '/news/bookmark' ?
+           currentNews.length > 0 ? 
                 <ul id="page-numbers">
                     {renderPageNumbers}
                 </ul>
-            :''}
+            :'' :''}
         </Layout>
     </>
     )

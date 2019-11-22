@@ -32,3 +32,9 @@ export function searchNews(value){
      });
     }
 }
+export const bookMarkNews = (list) => dispatch => {
+ dispatch({
+  type : 'BOOKMARK_NEWS',
+  payload : list
+ })
+}

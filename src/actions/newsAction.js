@@ -2,6 +2,12 @@ const axios = require('axios');
 
 const API = 'https://newsapi.org/v2/';
 const APIKey = '226439694ab54c6d9620a50d36c22b49';
+
+/**
+ *@author : kinjal birare
+ * This is use for the fetching the newsItem into the API
+ */
+
 export const fetchNewsInit = () => ({
   type: 'NEWS_INIT'
 });
@@ -25,6 +31,11 @@ export function fetchNewsAction(name, cat, language) {
   };
 }
 
+/**
+ *@author : kinjal birare
+ * This is use for the fetching the Search news item
+ */
+
 export function searchNews(value) {
   return dispatch => {
     dispatch(fetchNewsInit());
@@ -35,6 +46,11 @@ export function searchNews(value) {
       });
   };
 }
+
+/**
+ *@author : kinjal birare
+ * This is use for the fetching bookmark list
+ */
 export const bookMarkNews = list => dispatch => {
   dispatch({
     type: 'BOOKMARK_NEWS',

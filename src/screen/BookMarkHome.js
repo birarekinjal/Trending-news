@@ -47,7 +47,11 @@ const BookMarkHome = props => {
   });
   return (
     <>
-      <div className="news-main-container">{renderNews}</div>
+      {renderNews.length > 0 ? (
+        <div className="news-main-container">{renderNews}</div>
+      ) : (
+        <h1 className="no-post-found"> no bookmarks are available </h1>
+      )}
     </>
   );
 };

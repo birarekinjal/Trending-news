@@ -4,6 +4,7 @@ import Header from './header/Header';
 import Sidebar from './sidebar/Sidebar';
 
 const Layout = props => {
+  const { history, children } = props;
   return (
     <>
       <div className="main-Wrapper">
@@ -12,10 +13,10 @@ const Layout = props => {
           <Row>
             <Col lg="3">
               {' '}
-              <Sidebar history={props.history} />
+              <Sidebar history={history} />
             </Col>
             <Col lg="9">
-              <div className="News-Sections">{props.children}</div>
+              <div className="News-Sections">{children}</div>
             </Col>
           </Row>
         </div>

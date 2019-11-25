@@ -14,11 +14,14 @@ const Sidebar = props => {
             <a href="/news/bbc-news">BBC News</a>
           </li>
           <li>
-            <span
-              role="div"
-              onClick={() => props.history.push('/news/bookmark')}
-            >
-              BookMarks
+            <span>
+              <button
+                type="button"
+                onClick={() => props.history.push('/news/bookmark')}
+              >
+                {' '}
+                BookMarks{' '}
+              </button>
             </span>
           </li>
         </ul>

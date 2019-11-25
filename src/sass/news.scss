@@ -1,157 +1,184 @@
 .news-widget {
-     padding-top: 100px;
+  padding-top: 100px;
 
-     .main-sidebar {
-          height: calc(100vh - 100px);
-          padding: 50px 30px;
-          box-shadow: 6px 1px 8px #80808066;
+  .main-sidebar {
+    height: calc(100vh - 100px);
+    padding: 50px 30px;
+    box-shadow: 6px 1px 8px #80808066;
 
-          ul {
-               font-family: sans-serif;
+    ul {
+      font-family: sans-serif;
 
-               li {
-                    margin-right: 5px;
+      li {
+        margin-right: 5px;
+        cursor: pointer;
 
-                    a {
-                         display: inline-block;
-                         padding: 10px;
-                         color:#808080;
-                         font-size: 20px;
-                         line-height: 26px;
+        a {
+          display: inline-block;
+          padding: 10px;
+          color: #808080;
+          font-size: 20px;
+          line-height: 26px;
+        }
 
-                    }
-                    span{
-                         display: inline-block;
-                         padding: 10px;
-                         color: #808080;
-                         font-size: 20px;
-                         line-height: 26px;
-                         cursor: pointer;
-                    }
-                    span:hover{
-                         text-decoration: underline;
-                    }
-               }
+        span {
+          display: inline-block;
+          padding: 10px;
+          color: #808080;
+          font-size: 20px;
+          line-height: 26px;
+          cursor: pointer;
+
+          button {
+            background: transparent;
+            outline: 0;
+            border: 0;
+            padding: 0;
+            color: #808080;
           }
-     }
+        }
 
+        span:hover {
+          button {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
 }
 
 .News-Sections {
-     padding: 50px 20px;
+  padding: 50px 20px;
 }
 
 .news-main-container {
+  .news-articles {
+    margin-bottom: 10px;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #808080;
+    padding: 10px 0;
+  }
 
-     .news-articles {
-          margin-bottom: 10px;
-          width: 100%;
-          background: #ffffff;
-          border-bottom: 1px solid #808080;
-          padding: 10px 0;
-     }
+  .image-container {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 
-     .image-container {
-          img {
-               width: 100%;
-               height: 100%;
-               object-fit: cover;
-          }
-     }
+  .title {
+    font-size: 20px;
+    line-height: 20px;
+    font-family: sans-serif;
+    padding-bottom: 20px;
+    font-weight: 500;
+  }
 
-     .title {
-          font-size: 20px;
-          line-height: 20px;
-          font-family: sans-serif;
-          padding-bottom: 20px;
-          font-weight: 500;
-     }
+  .description {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: sans-serif;
+    padding-bottom: 10px;
+    font-weight: 500;
+  }
 
-     .description {
-          font-size: 14px;
-          line-height: 20px;
-          font-family: sans-serif;
-          padding-bottom: 10px;
-          font-weight: 500;
-     }
+  .url {
+    padding-bottom: 15px;
+    padding-right: 5px;
 
-     .url {
-          padding-bottom: 15px;
-          padding-right: 5px;
-          a {
-               display: inline-block;
-               font-size: 14px;
-               line-height: 20px;
-               font-family: sans-serif;
-               padding-bottom: 5px;
-               width: 100%;
-               overflow: hidden;
-               text-overflow: ellipsis;
-               white-space: pre;
-          }
-
-     }
+    a {
+      display: inline-block;
+      font-size: 14px;
+      line-height: 20px;
+      font-family: sans-serif;
+      padding-bottom: 5px;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: pre;
+    }
+  }
 }
 
 .filter-dropDown {
-     margin-bottom: 30px;
-     padding: 0 0 20px 0;
+  margin-bottom: 30px;
+  padding: 0 0 20px 0;
 
-     select {
-          height: 43px;
-          width: 100%;
-          background: #ffffff;
-          font-family: sans-serif;
-          border-radius: 4px;
-          padding: 10px;
-          color: #0000ff;
-          font-size: 18px;
-     }
+  select {
+    height: 43px;
+    width: 100%;
+    background: #ffffff;
+    font-family: sans-serif;
+    border-radius: 4px;
+    padding: 10px;
+    color: #0000ff;
+    font-size: 18px;
+  }
 }
 
 .no-post-found {
-     text-align: center;
-     padding: 30px;
+  text-align: center;
+  padding: 30px;
 }
 
 #page-numbers {
-         text-align: right ;
-         li {
-          display: inline-block;
-          padding: 7px 8px;
-          background: #77778aa3;
-          color: #ffffff;
-          margin-right: 7px;
-          border-radius: 5px;
-          font-size: 14px;
-          cursor: pointer;
-         }
-         li:hover, li.active{
-              background:#0000ffa3;
-         }
-        
+  text-align: right;
+
+  li {
+    display: inline-block;
+
+    background: #77778aa3;
+    color: #ffffff;
+    margin-right: 7px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+
+    button {
+      padding: 4px 9px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      background: transparent;
+      outline: 0;
+      border: 0;
+      display: inline-block;
+    }
+  }
+
+  li:hover,
+  li.active {
+    background: #0000ffa3;
+  }
 }
-.view-more-wrapper{
-     text-align:right;
-     padding-right:4px;
-     a{
-           font-size:14px;
-           display: inline-block;
-           font-weight:500;
-     }
-     a:hover{
-           color:#0838bd;
-           text-decoration:none;
-     }
+
+.view-more-wrapper {
+  text-align: right;
+  padding-right: 4px;
+
+  a {
+    font-size: 14px;
+    display: inline-block;
+    font-weight: 500;
+  }
+
+  a:hover {
+    color: #0838bd;
+    text-decoration: none;
+  }
 }
+
 .bookmark {
-     input{
-           position: absolute;
-           top: 5px;
-           left: 6px;
-           opacity: 0;
-     }
-     .bookmark-color{
-         color: blue;
-     }
+  input {
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    opacity: 0;
+  }
+
+  .bookmark-color {
+    color: blue;
+  }
 }

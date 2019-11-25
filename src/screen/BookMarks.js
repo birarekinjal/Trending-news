@@ -9,13 +9,16 @@ export default class BookMarks extends Component {
   }
 
   handleOnChange(list, e) {
-    this.props.bookMarkOnChange(e.target.checked, list);
+    const { bookMarkOnChange } = this.props;
+    bookMarkOnChange(e.target.checked, list);
     this.setState({
       checkValue: e.target.checked
     });
   }
 
   render() {
+    const { list } = this.props;
+    const { checkValue } = this.state;
     return (
       <>
         <div className="bookmark">
@@ -25,10 +28,10 @@ export default class BookMarks extends Component {
                 type="checkbox"
                 id="bookmark"
                 name="bookMarkInput"
-                onChange={this.handleOnChange.bind(this, this.props.list)}
+                onChange={this.handleOnChange.bind(this, list)}
               />
               <label htmlFor="bookmark">
-                {this.state.checkValue === true ? (
+                {checkValue === true ? (
                   <i className="material-icons"> bookmark </i>
                 ) : (
                   <i className="material-icons"> bookmark_border </i>

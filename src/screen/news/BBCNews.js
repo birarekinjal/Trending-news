@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Layout from '../../components/Layout';
-import { newsAction } from '../../actions/newsAction';
+import * as newsAction from '../../actions/newsAction';
 
 class BBCNews extends Component {
   constructor(props) {
@@ -12,11 +12,12 @@ class BBCNews extends Component {
   }
 
   componentDidMount() {
-    const { newAction } = this.props;
-    newsAction.newsAction();
+    const { news } = this.props;
+    news.newsAction();
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
       this.setState({
         newsData: nextProps.newsReducer.newsArticle

@@ -37,7 +37,7 @@ const BookMarkHome = props => {
               {' '}
               <a href={data.url} target="_blank" rel="noopener noreferrer">
                 {' '}
-                ReadMore>>
+                ReadMore &gt;&gt;
               </a>
             </div>
           </Col>
@@ -57,7 +57,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  newsAction: bindActionCreators(newsAction, dispatch)
+  news: bindActionCreators(newsAction, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookMarkHome);

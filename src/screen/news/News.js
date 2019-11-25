@@ -22,16 +22,17 @@ class News extends Component {
   }
 
   componentDidMount() {
-    const { location, newsAction } = this.props;
+    const { location, news } = this.props;
     if (location.pathname === '/news/bbc-news') {
       parm = 'bbcNews';
     } else {
       parm = 'us';
     }
-    newsAction.newsAction(parm, null, null);
+    news.fetchNewsAction(parm, null, null);
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
       this.setState({
         newsData: nextProps.newsReducer.newsArticle
@@ -41,18 +42,18 @@ class News extends Component {
 
   handleClick = event => {
     this.setState({
-      currentPage: Number(event.target.id)
+      currentPage: Number(event.target.value)
     });
   };
 
   filterHandleChange = value => {
-    const { newsAction } = this.props;
-    newsAction.newsAction(parm, value, null);
+    const { news } = this.props;
+    news.fetchNewsAction(parm, value, null);
   };
 
   languageHandleChange = value => {
-    const { newsAction } = this.props;
-    newsAction.newsAction(parm, null, value);
+    const { news } = this.props;
+    news.fetchNewsAction(parm, null, value);
   };
 
   preLoader = () => {
@@ -94,23 +95,24 @@ class News extends Component {
   };
 
   bookMarkOnChange = (value, list) => {
-    const newsPropsData = this.props;
+    const { news } = this.props;
     if (value === true) {
       bookMarksNews.push(list);
     } else {
       bookMarksNews.pop(list);
     }
-    newsPropsData.newsAction.bookMarkNews(bookMarksNews);
+    news.bookMarkNews(bookMarksNews);
   };
 
   render() {
     const { currentPage, newsPerPage, newsData } = this.state;
+    const { history, newsReducer } = this.props;
     const indexOfLastNews = currentPage * newsPerPage;
     const indexOfFirstNews = indexOfLastNews - newsPerPage;
     const pageNumbers = [];
     currentNews = newsData.slice(indexOfFirstNews, indexOfLastNews);
 
-    for (let i = 1; i <= Math.ceil(newsData.length / newsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(newsData.length / newsPerPage); i += 1) {
       pageNumbers.push(i);
     }
     const renderNews = currentNews.map(data => {
@@ -154,21 +156,21 @@ class News extends Component {
         </div>
       );
     });
+
     const renderPageNumbers = pageNumbers.map(number => {
+      const currentPageNo = currentPage === number ? 'active' : '';
       return (
-        <li
-          key={number}
-          id={number}
-          onClick={this.handleClick}
-          className={this.state.currentPage === number ? 'active' : ''}
-        >
-          {number}
+        <li key={number} id={number} className={currentPageNo}>
+          <button type="button" onClick={this.handleClick} value={number}>
+            {' '}
+            {number}{' '}
+          </button>
         </li>
       );
     });
     return (
       <>
-        <Layout history={this.props.history}>
+        <Layout history={history}>
           {window.location.pathname === '/news/bookmark' ? (
             <BookMarkHome />
           ) : (
@@ -186,7 +188,7 @@ class News extends Component {
                 </div>
               </div>
               <div className="news-articlesWrapper">
-                {this.props.newsReducer.loading === true ? (
+                {newsReducer.loading === true ? (
                   this.preLoader()
                 ) : (
                   <div className="data">
@@ -201,12 +203,9 @@ class News extends Component {
             </div>
           )}
 
-          {window.location.pathname !== '/news/bookmark' ? (
-            currentNews.length > 0 ? (
-              <ul id="page-numbers">{renderPageNumbers}</ul>
-            ) : (
-              ''
-            )
+          {window.location.pathname !== '/news/bookmark' &&
+          currentNews.length > 0 ? (
+            <ul id="page-numbers">{renderPageNumbers}</ul>
           ) : (
             ''
           )}
@@ -221,7 +220,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  newsAction: bindActionCreators(newsAction, dispatch)
+  news: bindActionCreators(newsAction, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(News);

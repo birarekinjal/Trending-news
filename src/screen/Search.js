@@ -12,21 +12,22 @@ class Search extends Component {
   }
 
   handleChange(e) {
-    const me = this;
+    const { news } = this.props;
     this.setState({
       value: e.target.value
     });
-    me.props.newsAction.searchNews(e.target.value);
+    news.searchNews(e.target.value);
   }
 
   render() {
+    const { value } = this.state;
     return (
       <>
         <div className="search-wrapper">
           <input
             type="text"
             placeholder="search.."
-            value={this.state.value}
+            value={value}
             className="search-input"
             onChange={this.handleChange.bind(this)}
           />
@@ -40,7 +41,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  newsAction: bindActionCreators(newsAction, dispatch)
+  news: bindActionCreators(newsAction, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

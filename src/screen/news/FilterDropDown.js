@@ -1,43 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
-import { newsAction } from '../../actions/newsAction';
+import * as newsAction from '../../actions/newsAction';
 
 class FilterDropDown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countries: [],
-      lan: []
+      categories: [],
+      language: []
     };
   }
 
   componentDidMount() {
     this.setState({
-      countries: ['general', 'health', 'science', 'sports', 'technology'],
-      lan: ['fr', 'he', 'it', 'nl', 'no', 'pt', 'ru', 'se']
+      categories: ['general', 'health', 'science', 'sports', 'technology'],
+      language: ['fr', 'he', 'it', 'nl', 'no', 'pt', 'ru', 'se']
     });
   }
 
   handleChange = e => {
-    this.props.filterHandleChange(e.target.value);
+    const { filterHandleChange } = this.props;
+    filterHandleChange(e.target.value);
   };
 
   languageHandleChange = e => {
-    const { props } = this.props;
-    props.languageHandleChange(e.target.value);
+    const { languageHandleChange } = this.props;
+    languageHandleChange(e.target.value);
   };
 
   render() {
+    const { categories, language } = this.state;
     return (
       <>
         <Row>
           <Col lg="3">
             <div>
               <select onChange={this.handleChange}>
-                {this.state.countries.map((category, key) => {
+                {categories.map(category => {
                   return (
-                    <option key={key} value={category}>
+                    <option key={category.title} value={category}>
                       {' '}
                       {category}{' '}
                     </option>
@@ -49,9 +51,13 @@ class FilterDropDown extends Component {
           <Col lg="3">
             <div>
               <select onChange={this.languageHandleChange}>
-                {this.state.lan.map((lan, key) => {
+                {language.map(lan => {
                   return (
-                    <option key={key} value={lan}>
+                    <option
+                      className={`${lan}_id`}
+                      key={`${lan}_id`}
+                      value={lan}
+                    >
                       {' '}
                       {lan}{' '}
                     </option>

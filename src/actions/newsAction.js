@@ -10,7 +10,7 @@ export const fetchNewsSuccess = newsData => ({
   type: 'NEWS_SUCCESS',
   payload: newsData
 });
-export function newsAction(name, cat, language) {
+export function fetchNewsAction(name, cat, language) {
   return dispatch => {
     dispatch(fetchNewsInit());
     let parm = '';

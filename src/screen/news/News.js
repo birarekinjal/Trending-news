@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Col, Row } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import * as newsAction from '../../actions/newsAction';
 import FilterDropDown from './FilterDropDown';
@@ -14,21 +15,29 @@ const bookMarksNews = [];
 class News extends Component {
   constructor(props) {
     super(props);
+    const token = localStorage.getItem('token');
+    let loggedIn = true;
+    if (token === null) {
+      loggedIn = false;
+    }
     this.state = {
       newsData: [],
       currentPage: 1,
-      newsPerPage: 4
+      newsPerPage: 4,
+      loggedIn
     };
   }
 
   componentDidMount() {
     const { location, news } = this.props;
-    if (location.pathname === '/news/bbc-news') {
-      parm = 'bbcNews';
-    } else {
-      parm = 'us';
-    }
-    news.fetchNewsAction(parm, null, null);
+    console.log(this.props);
+    console.log(location);
+    // if (location.pathname === '/news/bbc-news') {
+    //   parm = 'bbcNews';
+    // } else {
+    //   parm = 'us';
+    // }
+    // news.fetchNewsAction(parm, null, null);
   }
 
   // eslint-disable-next-line
@@ -105,6 +114,9 @@ class News extends Component {
   };
 
   render() {
+    if (this.state.loggedIn === false) {
+      return <Redirect to="/" />;
+    }
     const { currentPage, newsPerPage, newsData } = this.state;
     const { history, newsReducer } = this.props;
     const indexOfLastNews = currentPage * newsPerPage;

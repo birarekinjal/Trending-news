@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Search from '../../screen/Search';
 
 const Header = () => {
@@ -11,8 +12,11 @@ const Header = () => {
             <Col lg="4" sm="12" xs="12" className="logo">
               News
             </Col>
-            <Col lg="8" sm="12" xs="12" className="logo">
+            <Col lg="7" sm="12" xs="12" className="logo">
               <Search />
+            </Col>
+            <Col lg="6" sm="12" className="logout">
+              <Link to="/logout"> Logout </Link>
             </Col>
           </Row>
         </Container>

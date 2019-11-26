@@ -28,8 +28,8 @@ class Login extends Component {
             <Formik
               initialValues={{ username: '', password: '' }}
               onSubmit={(values, { setSubmitting }) => {
-                var userData = localStorage.getItem('userData');
-                var userDataList = JSON.parse(userData);
+                const userData = localStorage.getItem('userData');
+                const userDataList = JSON.parse(userData);
                 console.log(userDataList);
                 if (userDataList !== null) {
                   if (

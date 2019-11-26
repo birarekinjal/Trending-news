@@ -9,7 +9,7 @@ import FilterDropDown from './FilterDropDown';
 import BookMarks from '../BookMarks';
 import BookMarkHome from '../BookMarkHome';
 
-let parm = '';
+const parm = '';
 let currentNews = [];
 const bookMarksNews = [];
 class News extends Component {

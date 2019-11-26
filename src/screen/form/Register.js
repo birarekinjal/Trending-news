@@ -16,9 +16,11 @@ class Register extends Component {
     //     loggedIn
     // };
   }
+
   componentDidMount() {
     console.log('didmout');
   }
+
   render() {
     return (
       <div className="login-form">

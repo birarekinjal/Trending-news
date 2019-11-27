@@ -1,68 +1,69 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 import FormLayout from '../../components/form/FormLayout';
 
-class Register extends Component {
-  constructor(props) {
-    super(props);
-  }
+const SignUpSchema = Yup.object().shape({
+  username: Yup.string()
+    .required('Required'),
+  password: Yup.string()
+    .required('Required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+});
 
-  render() {
-    return (
-      <div className="login-form">
-        <FormLayout>
-          <div>
-            <h1 className="title">Register</h1>
-            <Formik
-              initialValues={{ username: '', password: '', email: '' }}
-              onSubmit={(values, { setSubmitting }) => {
-                localStorage.setItem('userData', JSON.stringify(values));
-                this.props.history.push('/');
-              }}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting
-              }) => (
+const Register = (props) => {
+  return (
+    <div className="login-form">
+      <FormLayout>
+        <div>
+          <h1 className="title">Register</h1>
+          <Formik
+            initialValues={{ username: '', password: '', email: '' }}
+            validationSchema={SignUpSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              localStorage.setItem('userData', JSON.stringify(values));
+              props.history.push('/');
+            }}
+          >
+            {({
+              isSubmitting
+            }) => (
                 <Form>
-                  <label>
+                  <label htmlFor="register-username">
                     Username
-                    <Field type="text" name="username" />
-                    <ErrorMessage name="username" component="div" />
+                    <Field type="text" name="username" id="register-username" placeholder="username" />
+                    <ErrorMessage name="username" component="div" className="error-msg" />
                   </label>
-                  <label>
+                  <label htmlFor="email">
                     Email
-                    <Field type="text" name="email" />
-                    <ErrorMessage name="email" component="div" />
+                    <Field type="text" name="email" id="email" placeholder="email" />
+                    <ErrorMessage name="email" component="div" className="error-msg" />
                   </label>
 
-                  <label>
+                  <label htmlFor="register-password">
                     Password
-                    <Field type="password" name="password" />
-                    <ErrorMessage name="password" component="div" />
+                    <Field type="password" name="password" id="register-password" placeholder="password" />
+                    <ErrorMessage name="password" component="div" className="error-msg" />
                   </label>
                   <button type="submit" disabled={isSubmitting}>
                     Submit
                   </button>
                 </Form>
               )}
-            </Formik>
-          </div>
-          <div>
+          </Formik>
+        </div>
+        <div>
+          {' '}
+          <div className="sign-up-link">
             {' '}
-            <div className="sign-up-link">
-              {' '}
-              <span onClick={() => this.props.history.push('/')}> Login </span>
-            </div>
+            {/* eslint-disable-next-line */}
+            <span onClick={() => props.history.push('/')}> Login </span>
           </div>
-        </FormLayout>
-      </div>
-    );
-  }
-}
+        </div>
+      </FormLayout>
+    </div >
+  );
+};
 export default Register;

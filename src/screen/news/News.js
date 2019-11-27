@@ -29,7 +29,7 @@ class News extends Component {
   }
 
   componentDidMount() {
-    const { location, news } = this.props;
+    const { news } = this.props;
     if (window.location.pathname === '/news/bbc-news') {
       parm = 'bbcNews';
     } else {
@@ -112,10 +112,11 @@ class News extends Component {
   };
 
   render() {
-    if (this.state.loggedIn === false) {
+    const { currentPage, newsPerPage, newsData, loggedIn } = this.state;
+
+    if (loggedIn === false) {
       return <Redirect to="/" />;
     }
-    const { currentPage, newsPerPage, newsData } = this.state;
     const { history, newsReducer } = this.props;
     const indexOfLastNews = currentPage * newsPerPage;
     const indexOfFirstNews = indexOfLastNews - newsPerPage;
@@ -136,8 +137,8 @@ class News extends Component {
                 </div>
               </Col>
             ) : (
-              ''
-            )}
+                ''
+              )}
             <Col lg={`${data.urlToImage != null ? '7 ' : '10'}`}>
               <div className="title">{data.title} </div>
               <div className="description"> {data.description} </div>
@@ -166,7 +167,6 @@ class News extends Component {
         </div>
       );
     });
-
     const renderPageNumbers = pageNumbers.map(number => {
       const currentPageNo = currentPage === number ? 'active' : '';
       return (
@@ -184,41 +184,41 @@ class News extends Component {
           {window.location.pathname === '/news/bookmark' ? (
             <BookMarkHome />
           ) : (
-            <div className="news-main-container">
-              <div className="filter-dropDown">
-                <div className="inner-filter">
-                  <Row>
-                    <Col>
-                      <FilterDropDown
-                        filterHandleChange={this.filterHandleChange}
-                        languageHandleChange={this.languageHandleChange}
-                      />
-                    </Col>
-                  </Row>
+              <div className="news-main-container">
+                <div className="filter-dropDown">
+                  <div className="inner-filter">
+                    <Row>
+                      <Col>
+                        <FilterDropDown
+                          filterHandleChange={this.filterHandleChange}
+                          languageHandleChange={this.languageHandleChange}
+                        />
+                      </Col>
+                    </Row>
+                  </div>
+                </div>
+                <div className="news-articlesWrapper">
+                  {newsReducer.loading === true ? (
+                    this.preLoader()
+                  ) : (
+                      <div className="data">
+                        {currentNews.length > 0 ? (
+                          <div>{renderNews}</div>
+                        ) : (
+                            <h1 className="no-post-found"> No News found</h1>
+                          )}
+                      </div>
+                    )}
                 </div>
               </div>
-              <div className="news-articlesWrapper">
-                {newsReducer.loading === true ? (
-                  this.preLoader()
-                ) : (
-                  <div className="data">
-                    {currentNews.length > 0 ? (
-                      <div>{renderNews}</div>
-                    ) : (
-                      <h1 className="no-post-found"> No News found</h1>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+            )}
 
           {window.location.pathname !== '/news/bookmark' &&
-          currentNews.length > 0 ? (
-            <ul id="page-numbers">{renderPageNumbers}</ul>
-          ) : (
-            ''
-          )}
+            currentNews.length > 0 ? (
+              <ul id="page-numbers">{renderPageNumbers}</ul>
+            ) : (
+              ''
+            )}
         </Layout>
       </>
     );

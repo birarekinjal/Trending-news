@@ -8,7 +8,7 @@ import Logout from '../../screen/Logout';
 import Register from '../../screen/form/Register';
 import SecretRoute from './SecretRoute';
 
-const Routes = props => {
+const Routes = () => {
   return (
     <>
       <Router>
@@ -16,7 +16,7 @@ const Routes = props => {
           <Route exact path="/" component={Login} />
           <SecretRoute exact path="/news" component={News} />
           <SecretRoute exact path="/news/bbc-news" component={News} />
-          <SecretRoute exact path="/news/bookmark" component={BookMarkHome} />
+          <SecretRoute exact path="/news/bookmark" component={News} />
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/register" component={Register} />
           <Route component={Notfound} />

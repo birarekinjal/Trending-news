@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Redirect } from 'react-router-dom';
+import * as Yup from "yup";
 import FormLayout from '../../components/form/FormLayout';
+
+const SignUpSchema = Yup.object().shape({
+  username: Yup.string()
+    .required('Required'),
+  password: Yup.string()
+    .required('Required'),
+
+});
 
 class Login extends Component {
   constructor(props) {
+
     const token = localStorage.getItem('token');
     let loggedIn = true;
     if (token === null) {
@@ -17,7 +27,8 @@ class Login extends Component {
   }
 
   render() {
-    if (this.state.loggedIn) {
+    const { loggedIn } = this.state;
+    if (loggedIn) {
       return <Redirect to="/news" />;
     }
     return (
@@ -27,10 +38,11 @@ class Login extends Component {
             <h1 className="title">Login</h1>
             <Formik
               initialValues={{ username: '', password: '' }}
-              onSubmit={(values, { setSubmitting }) => {
+              validationSchema={SignUpSchema}
+              onSubmit={(values => {
                 const userData = localStorage.getItem('userData');
                 const userDataList = JSON.parse(userData);
-                if (userDataList.username !== null && userDataList.password) {
+                if (userDataList.username !== null && userDataList.password !== null) {
                   if (
                     values.username === userDataList.username &&
                     values.password === userDataList.password
@@ -40,37 +52,33 @@ class Login extends Component {
                     this.setState({
                       loggedIn: true
                     });
+                  } else {
+                    alert('invalid data');
                   }
                 } else {
                   alert('please sign up');
                 }
-              }}
+              })}
             >
               {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
                 isSubmitting
               }) => (
-                <Form>
-                  <label>
-                    Username
-                    <Field type="text" name="username" />
-                    <ErrorMessage name="username" component="div" />
-                  </label>
-                  <label>
-                    Password
-                    <Field type="password" name="password" />
-                    <ErrorMessage name="password" component="div" />
-                  </label>
-                  <button type="submit" disabled={isSubmitting}>
-                    Submit
+                  <Form>
+                    <label htmlFor="username">
+                      Username
+                    <Field type="text" name="username" id="username" placeholder="username" />
+                      <ErrorMessage name="username" component="div" className="error-msg" />
+                    </label>
+                    <label htmlFor="password">
+                      Password
+                    <Field type="password" name="password" id="password" placeholder="password" />
+                      <ErrorMessage name="password" component="div" className="error-msg" />
+                    </label>
+                    <button type="submit" disabled={isSubmitting}>
+                      Submit
                   </button>
-                </Form>
-              )}
+                  </Form>
+                )}
             </Formik>
           </div>
           <div>

@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  BrowserRouter as Router,
   Route,
-  Switch,
   Redirect
 } from 'react-router-dom';
 
@@ -17,8 +15,8 @@ const SecretRoute = props => {
           {token === null ? (
             <Redirect to="/" />
           ) : (
-            <WrappedComponent {...props} />
-          )}
+              <WrappedComponent {...props} />
+            )}
         </>
       )}
     />

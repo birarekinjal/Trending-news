@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Redirect } from 'react-router-dom';
-import * as Yup from "yup";
+import * as Yup from 'yup';
 import FormLayout from '../../components/form/FormLayout';
 
 const SignUpSchema = Yup.object().shape({
-  username: Yup.string()
-    .required('Required'),
-  password: Yup.string()
-    .required('Required'),
-
+  username: Yup.string().required('Required'),
+  password: Yup.string().required('Required')
 });
 
 class Login extends Component {
   constructor(props) {
-
     const token = localStorage.getItem('token');
     let loggedIn = true;
     if (token === null) {
@@ -39,10 +35,13 @@ class Login extends Component {
             <Formik
               initialValues={{ username: '', password: '' }}
               validationSchema={SignUpSchema}
-              onSubmit={(values => {
+              onSubmit={values => {
                 const userData = localStorage.getItem('userData');
                 const userDataList = JSON.parse(userData);
-                if (userDataList.username !== null && userDataList.password !== null) {
+                if (
+                  userDataList.username !== null &&
+                  userDataList.password !== null
+                ) {
                   if (
                     values.username === userDataList.username &&
                     values.password === userDataList.password
@@ -58,27 +57,43 @@ class Login extends Component {
                 } else {
                   alert('please sign up');
                 }
-              })}
+              }}
             >
-              {({
-                isSubmitting
-              }) => (
-                  <Form>
-                    <label htmlFor="username">
-                      Username
-                    <Field type="text" name="username" id="username" placeholder="username" />
-                      <ErrorMessage name="username" component="div" className="error-msg" />
-                    </label>
-                    <label htmlFor="password">
-                      Password
-                    <Field type="password" name="password" id="password" placeholder="password" />
-                      <ErrorMessage name="password" component="div" className="error-msg" />
-                    </label>
-                    <button type="submit" disabled={isSubmitting}>
-                      Submit
+              {({ isSubmitting }) => (
+                <Form>
+                  <label htmlFor="username">
+                    Username
+                    <Field
+                      type="text"
+                      name="username"
+                      id="username"
+                      placeholder="username"
+                    />
+                    <ErrorMessage
+                      name="username"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </label>
+                  <label htmlFor="password">
+                    Password
+                    <Field
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </label>
+                  <button type="submit" disabled={isSubmitting}>
+                    Submit
                   </button>
-                  </Form>
-                )}
+                </Form>
+              )}
             </Formik>
           </div>
           <div>

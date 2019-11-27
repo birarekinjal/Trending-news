@@ -27,7 +27,15 @@ const Routes = props => {
         <Switch>
           <Route exact path="/" component={Login} />
 
-          <SecretRoute exact path="/news" component={News} />
+          <SecretRoute
+            exact
+            path="/news"
+            render={() => (
+              <div>
+                <News />
+              </div>
+            )}
+          />
           <Route exact path="/news/bbc-news" component={News} />
           <Route exact path="/news/bookmark" component={BookMarkHome} />
           <Route exact path="/logout" component={Logout} />

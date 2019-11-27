@@ -13,7 +13,7 @@ const Header = () => {
               News
             </Col>
             <Col lg="7" sm="12" xs="12" className="logo">
-              <Search />
+              {window.location.pathname === '/news' ? <Search /> : ''}
             </Col>
             <Col lg="6" sm="12" className="logout">
               <Link to="/logout"> Logout </Link>

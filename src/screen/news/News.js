@@ -9,7 +9,7 @@ import FilterDropDown from './FilterDropDown';
 import BookMarks from '../BookMarks';
 import BookMarkHome from '../BookMarkHome';
 
-const parm = '';
+let parm = '';
 let currentNews = [];
 const bookMarksNews = [];
 class News extends Component {
@@ -30,14 +30,13 @@ class News extends Component {
 
   componentDidMount() {
     const { location, news } = this.props;
-    console.log(this.props);
-    console.log(location);
-    // if (location.pathname === '/news/bbc-news') {
-    //   parm = 'bbcNews';
-    // } else {
-    //   parm = 'us';
-    // }
-    // news.fetchNewsAction(parm, null, null);
+    console.log(window.location.pathname);
+    if (window.location.pathname === '/news/bbc-news') {
+      parm = 'bbcNews';
+    } else {
+      parm = 'us';
+    }
+    news.fetchNewsAction(parm, null, null);
   }
 
   // eslint-disable-next-line

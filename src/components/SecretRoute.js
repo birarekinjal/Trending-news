@@ -13,20 +13,12 @@ class SecretRoute extends Component {
     if (token === null) {
       loggedIn = false;
     }
-    const { render, ...rest } = this.props;
-
+    const { component, render, ...rest } = this.props;
     return (
       <Route
         {...rest}
-        render={matchProps => (
-          <>
-            {console.log(matchProps)}
-            {loggedIn === false ? (
-              <Redirect from={matchProps.path} to="/" />
-            ) : (
-              render(matchProps)
-            )}
-          </>
+        render={props => (
+          <>{loggedIn === false ? <Redirect to="/" /> : render(props)}</>
         )}
       />
     );

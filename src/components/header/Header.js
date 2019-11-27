@@ -26,7 +26,7 @@ const Header = () => {
                   {' '}
                   <span>
                     {' '}
-                    <i class="material-icons"> power_settings_new </i>{' '}
+                    <i className="material-icons"> power_settings_new </i>{' '}
                   </span>
                 </Link>
               </Col>

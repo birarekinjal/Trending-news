@@ -1,0 +1,67 @@
+.main-Wrapper {
+  .news-widget {
+    .news-form-wrapper {
+      width: 400px;
+      margin: 100px auto;
+      box-shadow: 1px 1px 11px #808080ab;
+      padding: 30px;
+    }
+  }
+}
+
+.login-form {
+  .title {
+    font-size: 18px;
+    text-align: center;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 20px;
+    color: #0000ff;
+    font-weight: 300;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    border: 1px solid #80808038;
+    margin-top: 10px;
+  }
+
+  button {
+    width: 100%;
+    background: #0000ff;
+    color: #ffffff;
+    border: 0;
+    border: 1px solid #0000ff;
+    border-radius: 6px;
+    padding: 12px;
+  }
+
+  .sign-up-link {
+    margin-top: 20px;
+    text-align: center;
+
+    span {
+      display: inline;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+.logout-wrapper {
+  display: inline-block;
+  margin-top: 15px;
+
+  span {
+    display: inline-block;
+  }
+}

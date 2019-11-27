@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import FormLayout from '../../components/form/FormLayout';
-// import { Redirect } from 'react-router-dom';
 
 class Register extends Component {
   constructor(props) {
     super(props);
-    // const token = localStorage.getItem("token");
-    // let loggedIn = true;
-    // if (token === null) {
-    //     loggedIn = false;
-    // }
-    // this.state = {
-
-    //     loggedIn
-    // };
-  }
-
-  componentDidMount() {
-    console.log('didmout');
   }
 
   render() {
@@ -26,11 +12,10 @@ class Register extends Component {
       <div className="login-form">
         <FormLayout>
           <div>
-            <h1>Register</h1>
+            <h1 className="title">Register</h1>
             <Formik
               initialValues={{ username: '', password: '', email: '' }}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values, '_++++');
                 localStorage.setItem('userData', JSON.stringify(values));
                 this.props.history.push('/');
               }}
@@ -43,7 +28,6 @@ class Register extends Component {
                 handleBlur,
                 handleSubmit,
                 isSubmitting
-                /* and other goodies */
               }) => (
                 <Form>
                   <label>
@@ -69,12 +53,14 @@ class Register extends Component {
               )}
             </Formik>
           </div>
+          <div>
+            {' '}
+            <div className="sign-up-link">
+              {' '}
+              <span onClick={() => this.props.history.push('/')}> Login </span>
+            </div>
+          </div>
         </FormLayout>
-
-        <div className="signup-link">
-          {' '}
-          <span onClick={() => this.props.history.push('/')}> Login </span>
-        </div>
       </div>
     );
   }

@@ -30,7 +30,6 @@ class News extends Component {
 
   componentDidMount() {
     const { location, news } = this.props;
-    console.log(window.location.pathname);
     if (window.location.pathname === '/news/bbc-news') {
       parm = 'bbcNews';
     } else {

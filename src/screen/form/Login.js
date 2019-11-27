@@ -24,14 +24,13 @@ class Login extends Component {
       <div className="login-form">
         <FormLayout>
           <div>
-            <h1>Login</h1>
+            <h1 className="title">Login</h1>
             <Formik
               initialValues={{ username: '', password: '' }}
               onSubmit={(values, { setSubmitting }) => {
                 const userData = localStorage.getItem('userData');
                 const userDataList = JSON.parse(userData);
-                console.log(userDataList);
-                if (userDataList !== null) {
+                if (userDataList.username !== null && userDataList.password) {
                   if (
                     values.username === userDataList.username &&
                     values.password === userDataList.password
@@ -43,7 +42,7 @@ class Login extends Component {
                     });
                   }
                 } else {
-                  alert('please signup');
+                  alert('please sign up');
                 }
               }}
             >
@@ -55,7 +54,6 @@ class Login extends Component {
                 handleBlur,
                 handleSubmit,
                 isSubmitting
-                /* and other goodies */
               }) => (
                 <Form>
                   <label>
@@ -75,15 +73,17 @@ class Login extends Component {
               )}
             </Formik>
           </div>
-        </FormLayout>
-
-        <div className="signup-link">
-          {' '}
-          <span onClick={() => this.props.history.push('/register')}>
+          <div>
             {' '}
-            Sign Up{' '}
-          </span>
-        </div>
+            <div className="sign-up-link">
+              {' '}
+              <span onClick={() => this.props.history.push('/register')}>
+                {' '}
+                SignUp{' '}
+              </span>
+            </div>
+          </div>
+        </FormLayout>
       </div>
     );
   }

@@ -24,6 +24,17 @@ const Sidebar = props => {
               </button>
             </span>
           </li>
+          <li>
+            <span>
+              <button
+                type="button"
+                onClick={() => props.history.push('/news/fav')}
+              >
+                {' '}
+                Favorite{' '}
+              </button>
+            </span>
+          </li>
         </ul>
       </div>
     </>

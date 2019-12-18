@@ -16,7 +16,7 @@ return (
        { 
           data =>{
                      return (
-                         <Layout>
+                      <Layout>
                        <div className = "news-main-container">
                            {console.log(data , "data")}
                            {data  !=  undefined ?  data.map((data) => {
